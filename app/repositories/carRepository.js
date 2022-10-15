@@ -1,5 +1,4 @@
 const { car,record } = require("../models");
-
 module.exports = {
   create(a,b,c,d,e) {
     return car.create({

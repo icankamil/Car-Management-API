@@ -20,7 +20,6 @@ const authService = require("../../../services/authService");
 postCars(req,res){
     const {name,color,transmission,deleted,deleted_at}=req.body;
     const user = req.vessel
-    console.log(user)
     const token = req.headers.authorization;
     return res.status(200).send(carService.create(name,color,transmission,deleted,deleted_at,token,user));
  },

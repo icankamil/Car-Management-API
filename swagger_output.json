@@ -14,211 +14,33 @@
     "/api/login": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body of login",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "alphanumeric"
-                }
-              },
-              "required": [
-                "user_name",
-                "password"
-              ]
-            }
-          },
-          {
-            "name": "Authorization",
-            "description": "Authorization header of login containing JWT token with prefix bearer",
-            "in": "header",
-            "type": "string",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Authorization": {
-                  "type": "string",
-                  "example": "Jhon Doe"
-                },
-                "password": {
-                  "type": "number",
-                  "example": 29
-                }
-              },
-              "required": [
-                "Authorization",
-                "password"
-              ]
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {}
       }
     },
     "/api/admins": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body2",
-            "in": "body",
-            "description": "Request body of login",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "alphanumeric"
-                },
-                "full_name": {
-                  "type": "string",
-                  "example": "Human name"
-                },
-                "token": {
-                  "type": "string",
-                  "example": "Generated token"
-                }
-              },
-              "required": [
-                "user_name",
-                "password",
-                "full_name",
-                "token"
-              ]
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {}
       }
     },
     "/api/members/register": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body of login",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "alphanumeric"
-                },
-                "full_name": {
-                  "type": "string",
-                  "example": "Human name"
-                },
-                "token": {
-                  "type": "string",
-                  "example": "Generated token"
-                }
-              },
-              "required": [
-                "user_name",
-                "password",
-                "full_name",
-                "token"
-              ]
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {}
       }
     },
     "/api/cars": {
       "get": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body of login",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "alphanumeric"
-                },
-                "full_name": {
-                  "type": "string",
-                  "example": "Human name"
-                },
-                "token": {
-                  "type": "string",
-                  "example": "Generated token"
-                }
-              },
-              "required": [
-                "user_name",
-                "password",
-                "full_name",
-                "token"
-              ]
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {}
       },
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body of login",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "alphanumeric"
-                },
-                "full_name": {
-                  "type": "string",
-                  "example": "Human name"
-                },
-                "token": {
-                  "type": "string",
-                  "example": "Generated token"
-                }
-              },
-              "required": [
-                "user_name",
-                "password",
-                "full_name",
-                "token"
-              ]
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {}
       }
     },
@@ -231,38 +53,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body of login",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "alphanumeric"
-                },
-                "full_name": {
-                  "type": "string",
-                  "example": "Human name"
-                },
-                "token": {
-                  "type": "string",
-                  "example": "Generated token"
-                }
-              },
-              "required": [
-                "user_name",
-                "password",
-                "full_name",
-                "token"
-              ]
-            }
           }
         ],
         "responses": {}
@@ -275,38 +65,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body of login",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "alphanumeric"
-                },
-                "full_name": {
-                  "type": "string",
-                  "example": "Human name"
-                },
-                "token": {
-                  "type": "string",
-                  "example": "Generated token"
-                }
-              },
-              "required": [
-                "user_name",
-                "password",
-                "full_name",
-                "token"
-              ]
-            }
           }
         ],
         "responses": {}
@@ -321,38 +79,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body of login",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "alphanumeric"
-                },
-                "full_name": {
-                  "type": "string",
-                  "example": "Human name"
-                },
-                "token": {
-                  "type": "string",
-                  "example": "Generated token"
-                }
-              },
-              "required": [
-                "user_name",
-                "password",
-                "full_name",
-                "token"
-              ]
-            }
           }
         ],
         "responses": {}
