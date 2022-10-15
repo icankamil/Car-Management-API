@@ -1,0 +1,362 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body of login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "alphanumeric"
+                }
+              },
+              "required": [
+                "user_name",
+                "password"
+              ]
+            }
+          },
+          {
+            "name": "Authorization",
+            "description": "Authorization header of login containing JWT token with prefix bearer",
+            "in": "header",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Authorization": {
+                  "type": "string",
+                  "example": "Jhon Doe"
+                },
+                "password": {
+                  "type": "number",
+                  "example": 29
+                }
+              },
+              "required": [
+                "Authorization",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/admins": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body2",
+            "in": "body",
+            "description": "Request body of login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "alphanumeric"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Human name"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "Generated token"
+                }
+              },
+              "required": [
+                "user_name",
+                "password",
+                "full_name",
+                "token"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/members/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body of login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "alphanumeric"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Human name"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "Generated token"
+                }
+              },
+              "required": [
+                "user_name",
+                "password",
+                "full_name",
+                "token"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/cars": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body of login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "alphanumeric"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Human name"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "Generated token"
+                }
+              },
+              "required": [
+                "user_name",
+                "password",
+                "full_name",
+                "token"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body of login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "alphanumeric"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Human name"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "Generated token"
+                }
+              },
+              "required": [
+                "user_name",
+                "password",
+                "full_name",
+                "token"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/cars/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body of login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "alphanumeric"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Human name"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "Generated token"
+                }
+              },
+              "required": [
+                "user_name",
+                "password",
+                "full_name",
+                "token"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body of login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "alphanumeric"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Human name"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "Generated token"
+                }
+              },
+              "required": [
+                "user_name",
+                "password",
+                "full_name",
+                "token"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/cars/{id}/delete": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body of login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "alphanumeric"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Human name"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "Generated token"
+                }
+              },
+              "required": [
+                "user_name",
+                "password",
+                "full_name",
+                "token"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    }
+  }
+}
