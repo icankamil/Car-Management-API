@@ -65,4 +65,20 @@ async getUser(a){
       return err != null? JSON.stringify({'message':`${err}` }):JSON.stringify({'message':'your credential is not valid'});
     }
 },
+async getMe(a){
+  try{
+    const bearerToken = a.split(" ")[1];
+     const getPrefix = a.split(bearerToken)[0];
+     const user = await authRepository.findToken(bearerToken);
+     const prefix = getPrefix.replace(/\s/g, '')
+    const users = await authRepository.findUser(bearerToken);
+    const tokenPayload = jwt.verify(
+      user.token,
+      process.env.JWT_SIGNATURE_KEY || prefix
+    );
+   if(tokenPayload != false)return JSON.stringify({"data":users});
+   }catch(err){
+     return err != null? JSON.stringify({'message':`${err}` }):JSON.stringify({'message':'your credential is not valid'});
+   }
+},
 };

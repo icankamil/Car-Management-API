@@ -9,6 +9,7 @@ const swaggerDocument = require("../swagger_output.json");
  *       implementations
  */
 apiRouter.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
+apiRouter.get("/api/whoami", controllers.api.v1.authController.whoami);
 apiRouter.post("/api/login", controllers.api.v1.authController.login);
 apiRouter.post("/api/admins", controllers.api.v1.authController.authentication,controllers.api.v1.authController.createAdmin);
 apiRouter.post("/api/members/register", controllers.api.v1.authController.createUsers);

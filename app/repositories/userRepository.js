@@ -32,6 +32,15 @@ module.exports = {
     )
   },
 
+  findUser(a){
+    return user.findOne(
+      {attributes : ['user_name','full_name','token'],
+      where:{
+        token:a
+      }}
+    )
+  },
+
   findAll() {
     return User.findAll();
   },

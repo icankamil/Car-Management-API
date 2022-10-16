@@ -1,87 +1,537 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.3",
   "info": {
-    "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "Binar Car Management API - OpenAPI 3.0",
+    "description": "This API doc provides any availables endpoint both for admin/member. Of course theres differences scope for admin access and member access due to assigned role to each users entity. Every users (both admin/users) needs to acquire token first to access each endpoint, achieved through login endpoint. Therefore every admin/member could access any endpoint that already assigned based on their authentication/authorization based on system rules.  \n\n_Bear in mind, every request should have header with key Authorization, and value of token with prefixes_ admins _for assigned admin,_ members _for user that already registered in the system and_ Supersecret _for superadmin_",
+    "version": "1.0.11"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
-  "schemes": [
-    "http"
+  "externalDocs": {
+    "description": "Project Repo",
+    "url": "https://github.com/icankamil/Car-Management-API"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:port/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "cars",
+      "description": "cars available api's endpoint"
+    },
+    {
+      "name": "users",
+      "description": "User management through API"
+    }
   ],
   "paths": {
-    "/api/login": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/api/admins": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/api/members/register": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/api/cars": {
+    "/cars": {
       "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      },
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": [
+          "cars"
+        ],
+        "summary": "Get all car data",
+        "description": "Get all available car with filtered delete equal to 0",
+        "operationId": "getCar",
+        "responses": {
+          "200": {
+            "description": "Return object data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "example": "Array of Object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "/api/cars/{id}": {
+    "/cars/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "cars"
+        ],
+        "summary": "Get single car data",
+        "description": "Get single car data, including log activity regarding the data (only admins/superadmin)",
+        "operationId": "getSingleCar",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of car that needs to be fetched",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Return object data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "example": "Array of Object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "cars"
+        ],
+        "summary": "Update an existing car",
+        "description": "Update an existing car by request param id. Its only possible for user with type admin/superadmin to update data (hence, we need the admin/superadmin token everytime we update the data)",
+        "operationId": "updatesingleCarById",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of car that will be edited",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
         ],
-        "responses": {}
+        "requestBody": {
+          "description": "Update an existing car in the system",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "columnName": {
+                    "type": "string",
+                    "example": "String || Integer"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully update car data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully update car data"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied/ID not supplied/unathorized access"
+          }
+        },
+        "security": [
+          {
+            "auth_header": [
+              "update:cars",
+              "read:cars"
+            ]
+          }
+        ]
       }
     },
-    "/api/cars/{id}/delete": {
+    "/cars/": {
+      "post": {
+        "tags": [
+          "cars"
+        ],
+        "summary": "Add a new car to the system",
+        "description": "Insert new car by request body object, following car table structure(exclude). Its only possible for user with type admin/superadmin to insert car data (hence, we need the admin/superadmin token everytime we update the data)",
+        "requestBody": {
+          "description": "Create a new car in the system (transmission=1 for AT, 2 for MT | deleted=0 for available | 1 for deleted)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "BMW Z7"
+                  },
+                  "color": {
+                    "type": "string",
+                    "example": "Red"
+                  },
+                  "transmission": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "deleted": {
+                    "type": "integer",
+                    "example": 0
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Car created! with name BMW Z7",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Car created! with name BMW Z7"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/{id}/delete": {
       "put": {
-        "description": "",
+        "tags": [
+          "cars"
+        ],
+        "summary": "Delete existing car by selected id",
+        "description": "Delete operation only on data, not bulk delete.",
+        "operationId": "deleteSingleCarById",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of car that will be deleted",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
         ],
-        "responses": {}
+        "requestBody": {
+          "description": "Update an existing car in the system",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "deleted": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully Deleted car, deleted by ${userName} at ${new Date()}",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully update car data"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied/ID not supplied/unathorized access"
+          }
+        },
+        "security": [
+          {
+            "auth_header": [
+              "update:cars",
+              "read:cars"
+            ]
+          }
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Login by username(email) and password",
+        "description": "Login included header with key Authorization and token with predefined prefixes as value",
+        "operationId": "loginUsers",
+        "requestBody": {
+          "description": "only needs user_name and password propert in form raw object (JSON)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string",
+                    "example": "users@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "testpassword"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Car created! with name BMW Z7",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Welcome Users, please save the token somewhere else to include in another transaction"
+                    },
+                    "credential": {
+                      "type": "string",
+                      "example": "users@mail.com"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "alphanumeric random generated token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/whoami": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get details about users who active",
+        "description": "This request must be provided along included header with key Authorization and token with predefined prefixes as value",
+        "operationId": "getDetails",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user_name": {
+                      "type": "string",
+                      "example": "users@mail.com"
+                    },
+                    "full_name": {
+                      "type": "string",
+                      "example": "Full Name"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "alphanumeric random generated token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admins": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create users with roles admin",
+        "description": "This request only available for user with role Superadmin",
+        "operationId": "createAdmins",
+        "requestBody": {
+          "description": "You have to supply email as username, password and fullname of admins in form of raw object request (JSON)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string",
+                    "example": "users@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "testpassword"
+                  },
+                  "full_name": {
+                    "type": "string",
+                    "example": "Users Full Name"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Admin created! with credential adminn@mail.com and token alphanumeric random generated token"
+                    },
+                    "credential": {
+                      "type": "string",
+                      "example": "users@mail.com"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "alphanumeric random generated token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/members/register": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Self registration for user role member",
+        "description": "This request available for public",
+        "operationId": "createMembers",
+        "requestBody": {
+          "description": "You have to supply email as username, password and fullname of admins in form of raw object request (JSON)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string",
+                    "example": "users@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "testpassword"
+                  },
+                  "full_name": {
+                    "type": "string",
+                    "example": "Users Full Name"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Users created! with credential member2@mail.com and generated alphanumeric token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "auth_header": {
+        "type": "http",
+        "scheme": "Prefixes token"
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
       }
     }
   }

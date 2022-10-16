@@ -34,5 +34,10 @@
       req.vessel = result.full_name
       result.user_name ? next() : res.status(401).json({message:"unauthorized"});
     },
+    async whoami(req,res){
+      const authToken = req.headers.authorization;
+      const vessel = await authService.getMe(authToken);
+      res.status(200).send(vessel);
+    },
  };
  
