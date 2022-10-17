@@ -20,12 +20,15 @@ const authService = require("../../../services/authService");
 postCars(req,res){
     const {name,color,transmission,deleted,deleted_at}=req.body;
     const user = req.vessel
-    const token = req.headers.authorization;
-    return res.status(200).send(carService.create(name,color,transmission,deleted,deleted_at,token,user));
+    carService.create(name,color,transmission,deleted,deleted_at,user).then(result=>{
+        typeof result == typeof "string"?res.status(200).send(result):res.status(400).json(`${result}`);
+    }); 
  },
  async getSingleCars(req,res){
     const id=req.params.id;
-    return res.status(200).json(await carService.get(id));
+    return carService.get(id).then(result=>{
+        typeof result == typeof "string"?res.status(400).json(`${result}`) : res.status(200).json(result);
+    });
  },
 
  updateCars(req,res){
@@ -35,7 +38,8 @@ postCars(req,res){
 
 deleteCars(req,res){
     const id = req.params.id;
-    carService.delete(id,req.vessel).then(result => res.status(200).json({message:'Successfully deleted car data'})).status(400).catch(err=>res.json(err))
+    carService.delete(id,req.vessel).then(result => 
+        typeof result == typeof "" ? res.status(200).json({message:result}):res.status(400).json(result))
  },
  };
  

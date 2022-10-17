@@ -43,7 +43,7 @@ module.exports = {
 
   findAll() {
     return car.findAll({
-      attributes : [['name','Car Series'],'color',['transmission','1=AT/2=MT']],where:{deleted:0}},
+      attributes : ['id',['name','Car Series'],'color',['transmission','1=AT/2=MT']],where:{deleted:0}},
       );
   },
 

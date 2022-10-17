@@ -18,10 +18,10 @@ async login(a,b,c){
 
         return JSON.stringify({'message':`Welcome ${user.full_name}, please save the token somewhere else to include in another transaction`,'credential':user.user_name,'token':user.token});
      } else {
-           return JSON.stringify({'message':'You are not verified user!'});
+           return Error(JSON.stringify({'message':'You are not verified user!'}));
         }
      }catch(err){
-       return err != null? JSON.stringify({'message':`${err}` }):JSON.stringify({'message':'your credential is not valid'});
+       return Error(err)
      }
 },
 async createAdmin(a,b,c,d){
@@ -32,7 +32,7 @@ async createAdmin(a,b,c,d){
     return JSON.stringify({'message':`Admin created! with credential ${a} and token ${token}`});
    }
    catch(err){
-        return JSON.stringify({'message':`${err}`});
+    return Error(err)
    }
 },
 async createUser(a,b,c,d){
@@ -43,7 +43,7 @@ async createUser(a,b,c,d){
     return JSON.stringify({'message':`Users created! with credential ${a} and token ${token}`});
    }
    catch(err){
-        return JSON.stringify({'message':`${err}`});
+    return Error(err);
    }
 },
 async getUser(a){
@@ -76,9 +76,9 @@ async getMe(a){
       user.token,
       process.env.JWT_SIGNATURE_KEY || prefix
     );
-   if(tokenPayload != false)return JSON.stringify({"data":users});
+   if(tokenPayload != false)return users;
    }catch(err){
-     return err != null? JSON.stringify({'message':`${err}` }):JSON.stringify({'message':'your credential is not valid'});
+     return err != null? JSON.stringify({'message':`${err}` }):JSON.stringify({message:'your credential is not valid'});
    }
 },
 };

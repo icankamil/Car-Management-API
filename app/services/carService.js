@@ -1,43 +1,23 @@
 const carRepository = require("../repositories/carRepository");
 const recordRepository = require("../repositories/recordRepository");
 const jwt = require("jsonwebtoken");
+const { json } = require("sequelize");
 module.exports = {
-  create(a,b,c,d,e,f,g) {
-    try{
-      let tokenPayload = false
-      const bearerToken = f.split(" ")[1];
-      const getPrefix = f.split(bearerToken)[0];
-      const prefix = getPrefix.replace(/\s/g, '')
-      if(prefix == "Supersecret" || prefix == "admins"){
-      tokenPayload = jwt.verify(
-        bearerToken,
-        process.env.JWT_SIGNATURE_KEY || prefix
-      );
-      }
-      if(tokenPayload){
+  create(a,b,c,d,e,g) {
         const message= `Successfully created car with name ${a}, created by ${g} at ${new Date()}`;
-        carRepository.create(a,b,c,d,e).then((result)=>{
-          const vessel = result.dataValues
+        let hasil;
+        return carRepository.create(a,b,c,d=0,e).then((result)=>{
+          let vessel
+          vessel = result.dataValues
           recordRepository.create(message,vessel.id).then((result)=>{
             return JSON.stringify({'message':message});
           }).catch((err)=>{
-            return JSON.stringify({'message':`${err}`});
+            return Error(err);
           })
-        });
-        recordRepository.create(message);
-        return JSON.stringify({
-          'message':`Car created! with name ${a}`
+          return hasil = JSON.stringify({'message':message});
+        }).catch(err=>{
+          return hasil = Error(err);
         })
-      }else{
-        return JSON.stringify({
-          'message':'You are not permitted to create car!'
-        })
-      }
-  }catch(err){
-    return JSON.stringify({
-      'message':`${err}`
-    })
-  }
   },
 
   async update(id, requestBody,c) {
@@ -48,8 +28,14 @@ module.exports = {
 
   async delete(id,c) {
     const message= `Successfully Deleted car, deleted by ${c} at ${new Date()}`;
-    await recordRepository.create(message,id);
-    return carRepository.updateDelete(id, 1);
+    recordRepository.create(message,id).then(result=>{
+      return "success delete";
+    });
+    return carRepository.updateDelete(id, 1).then(result=>{
+      return JSON.stringify({'message':message});
+    }).catch(err=>{
+      return Error(err);
+    });
   },
 
   async list() {
@@ -73,6 +59,12 @@ module.exports = {
   },
 
   get(id) {
-    return carRepository.find(id);
+    return carRepository.find(id).then(result=>{
+      if(result == null){
+        return "There is no car with that id";
+      }else{
+        return result;
+      }
+    });
   },
 };
