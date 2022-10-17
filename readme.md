@@ -11,7 +11,7 @@ ERD dari sistem ini bisa dilihat melalui tautan berikut : https://dbdiagram.io/d
 
 
 ## API Endpoint
-Perlu diingat bahwa setiap transaksi yang berkaitan dengan CRUD admin memerlukan token superadmin/admin yang didapatkan pada saat login, login Superadmin :
+Perlu diingat bahwa setiap transaksi yang berkaitan dengan CRUD admin memerlukan token superadmin yang didapatkan pada saat login, login Superadmin :
 Username : ```superadmin@mail.com```
 Password : ```getcloser```
 Token Prefix : ```Supersecret generatedjwttoken```
