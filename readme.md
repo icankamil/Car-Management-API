@@ -1,7 +1,7 @@
 
 # Binar Car Management API
 
-API Management data mobil dengan tech stack Node.JS dan PostgresSQL
+API Management data mobil dengan tech stack Node.JS dan PostgresSQL, dengan kaidah Service Repository Pattern
 
 ## Entity Relationship Diagram (ERD)
 ERD dari sistem ini bisa dilihat melalui tautan berikut : https://dbdiagram.io/d/634db81847094101957ed8ef
