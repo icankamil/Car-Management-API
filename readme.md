@@ -12,8 +12,8 @@ ERD dari sistem ini bisa dilihat melalui tautan berikut : https://dbdiagram.io/d
 
 ## API Endpoint
 Perlu diingat bahwa setiap transaksi yang berkaitan dengan CRUD admin memerlukan token superadmin yang didapatkan pada saat login, login Superadmin :
-Username : ```superadmin@mail.com```
-Password : ```getcloser```
+  Username : ```superadmin@mail.com```
+  Password : ```getcloser```
 Token Prefix : ```Supersecret generatedjwttoken```
 User superadmin didapatkan dengan cara menerapkan seeder menggunakan sequelizer, setelah data berhasil di-seeds, lakukan query langsung pada tabel untuk mendapatkan token superadmin agar dapat melakukan login.
 
